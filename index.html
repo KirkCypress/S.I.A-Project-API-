@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <h1>Welcome to the Pokédex Viewer!</h1>
+        <p>Explore and learn about your favorite Pokémon.</p>
+        <button onclick="navigateToPokedex()">Go to Pokédex Viewer</button>
+    </div>
+
+    <script>
+        function navigateToPokedex() {
+            window.location.href = "pokedex.html";
+        }
+    </script>
+
+    <div id="searchHistory" class="search-history"></div>
+
+    <div class="modal-overlay"></div>
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <p id="errorMessage">
+                <span>Error:</span> Unable to process your request. Please try again later!
+            </p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Pokémon Logo at the top-left corner -->
+    <div class="pokemon-logo">
+        <img src="/pics/LOGO.png" alt="Pokemon Logo">
+    </div>
+
+    <div class="container">
+        <h1>Pokémon Viewer</h1>
+        <p>Welcome to the Pokémon Viewer Section! You can fetch or get a random Pokémon. In this section, you can view the height, weight, abilities, and stats of your desired Pokémon.</p>
+        <div class="input-container">
+            <input type="text" id="pokemonName" placeholder="Enter Pokémon name" />
+            <button onclick="fetchData()">Fetch Pokémon</button>
+            <button onclick="fetchRandomPokemon()">Get Random Pokémon</button>
+        </div>
+        
+        <div id="pokemonInfo" class="pokemon-info">
+            <img id="pokemonSprite" src="" alt="Pokemon Sprite" />
+            <h2 id="name"></h2>
+            <p><strong>Height:</strong> <span id="height"></span> m</p>
+            <p><strong>Weight:</strong> <span id="weight"></span> kg</p>
+            <p><strong>Abilities:</strong> <span id="abilities"></span></p>
+            <div id="statsContainer" class="stats-container">
+                <h3>Stats:</h3>
+                <div id="stats"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Compare Pokémon</h1>
+            <p>Welcome to the Compare Pokémon Section! In this section, you can compare the heights, weights, and base experiences of two Pokémon.</p>
+            <div class="input-container">
+                <input type="text" id="pokemon1" placeholder="Enter Pokémon 1">
+                <input type="text" id="pokemon2" placeholder="Enter Pokémon 2">
+                <button id="compareButton">Compare</button>
+            </div>
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+            </div>
+            <div class="compare-section">
+                <div id="pokemonDisplay1" class="pokemon-info-2" style="display: none;">
+                    <img id="pokemonImage1" src="" alt="Pokémon 1 Image">
+                    <h2 id="pokemonName1"></h2>
+                    <p id="pokemonStats1"></p>
+                </div>
+                <div id="pokemonDisplay2" class="pokemon-info-2" style="display: none;">
+                    <img id="pokemonImage2" src="" alt="Pokémon 2 Image">
+                    <h2 id="pokemonName2"></h2>
+                    <p id="pokemonStats2"></p>
+                </div>
+            </div>
+        </div>
+        <script src="index.js"></script>
+
+        <script>
+            // Wait until the entire page is loaded
+            window.addEventListener("load", function () {
+                const loadingScreen = document.getElementById("loading");
+                loadingScreen.classList.add("hidden"); // Add hidden class to hide the loader
+            });
+        </script>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+/* Import Futuristic Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+
+/* Global Custom Cursor */
+* {
+    cursor: url('pics/custom-cursor1.png'), auto;
+}
+
+/* Specific Elements */
+button,
+input,
+.modal,
+.modal-overlay,
+.close-btn,
+.container:hover {
+    cursor: url('pics/custom-cursor1.png'), auto;
+}
+
+/* Hover Effects */
+button:hover,
+.modal button:hover,
+.close-btn:hover {
+    cursor: url('pics/custom-cursor2.png'), pointer;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    text-align: center;
+    color: #000000;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #000000;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #000000;
+    transition: background 0.3s ease;
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff8c00, #ff2e63);
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Pokémon Info */
+.pokemon-info {
+    display: none;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+#pokemonSprite {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#pokemonSprite:hover {
+    transform: scale(1.15);
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+    color: #000000;
+}
+
+/* Stat Bars */
+.stats-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stat-name {
+    flex: 1;
+    font-size: 1.2rem;
+    color: #000000;
+}
+
+.bar {
+    flex: 3;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #ff2e63, #ff8c00);
+    width: var(--bar-width);
+    transition: width 0.3s ease;
+}
+
+.stat-value {
+    font-size: 1rem;
+    color: #000000;
+    margin-left: 10px;
+}
+
+/* General Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it appears above other content */
+    width: 90%;
+    max-width: 400px;
+    background-color: #ffffff; /* White background for readability */
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+    font-family: 'Poppins', sans-serif; /* Clean, modern font */
+}
+
+/* Overlay (Darkens the background) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    z-index: 999;
+    display: none; /* Hidden by default */
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff4f4f; /* Bright red for emphasis */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #d60000; /* Darker red on hover */
+}
+
+/* Error Message Text */
+.modal-content p {
+    font-size: 1.5rem; /* Larger text for readability */
+    color: #333333; /* Dark gray for better contrast */
+    font-weight: 600;
+    margin: 20px 0;
+    line-height: 1.8; /* Improved spacing */
+}
+
+.modal-content p span {
+    color: #ff4f4f; /* Red for key parts of the error message */
+    font-weight: bold;
+}
+
+/* Button Styling */
+.modal button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #f5a623;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #f7b731;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    .pokemon-info img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+}
+
+.compare-section {
+    margin: 20px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex; /* Use flexbox for side-by-side layout */
+    justify-content: space-around; /* Evenly space Pokémon cards */
+    gap: 20px; /* Space between the Pokémon displays */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.pokemon-info {
+    display: none;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.pokemon-info-2 {
+    text-align: center; /* Center text inside each Pokémon card */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 200px; /* Ensure uniform width for Pokémon cards */
+}
+
+.pokemon-info-2 img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.compare-section input {
+    margin: 5px;
+    padding: 8px;
+    width: 150px;
+}
+
+.comparison-result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #eef2f5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex; /* Enable flexbox layout */
+    gap: 20px; /* Add spacing between items */
+    justify-content:center; /* Center images horizontally */
+    align-items: center; /* Align images vertically */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.comparison-result h4 {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Individual Pokémon Card */
+.pokemon-card {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 200px;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05);
+}
+
+.pokemon-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pokemon-card h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+}
+
+/* Loading Overlay */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Ensure it appears above all content */
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #f3f3f3; /* Light gray */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Keyframes for Spin Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide the loading screen when not active */
+#loading.hidden {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
